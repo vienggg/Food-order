@@ -109,23 +109,27 @@ export function QueuePage() {
           <p className="muted">New orders appear here when you refresh.</p>
         </div>
       ) : (
+        // Phone: one card per order. Desktop: the same items laid out as table rows (styles.css).
         <ul className="queue">
+          <li className="queue-headrow" aria-hidden="true">
+            <span>Order</span>
+            <span>Customer</span>
+            <span>Items</span>
+            <span>Placed</span>
+            <span>Total</span>
+            <span>Action</span>
+          </li>
           {orders.map((o) => (
             <li className="card order-card" key={o.id} data-testid={`order-${o.id}`}>
-              <div className="order-top">
-                <span className="order-no">#{o.id}</span>
-                <span className="pill placed">PLACED</span>
-              </div>
-              <p className="order-who">
-                {o.customer.name} · {formatPlacedTime(o.createdAt)}
-              </p>
-              <p className="muted">{items(o)}</p>
-              <div className="order-bottom">
-                <strong>{baht(o.total)}</strong>
-                <button className="btn small" disabled={busyId === o.id} onClick={() => accept(o.id)}>
-                  {busyId === o.id ? "Accepting…" : "Accept order"}
-                </button>
-              </div>
+              <span className="q-no order-no">#{o.id}</span>
+              <span className="q-pill pill placed">PLACED</span>
+              <span className="q-who">{o.customer.name}</span>
+              <span className="q-time muted">{formatPlacedTime(o.createdAt)}</span>
+              <span className="q-items muted">{items(o)}</span>
+              <strong className="q-total">{baht(o.total)}</strong>
+              <button className="q-action btn small" disabled={busyId === o.id} onClick={() => accept(o.id)}>
+                {busyId === o.id ? "Accepting…" : "Accept order"}
+              </button>
             </li>
           ))}
         </ul>

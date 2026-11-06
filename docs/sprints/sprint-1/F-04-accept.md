@@ -56,7 +56,7 @@ One table in `server/src/orders/transitions.ts`, used by every status change now
 
 Per [`../../ui/ui-spec.md`](../../ui/ui-spec.md) S5.
 - Heading "New orders" with the count; **Refresh queue** button (no auto-polling).
-- Phone: one card per order — `#id`, customer name, placed time, items summary ("Latte ×2, Croissant ×1"), total `฿xx.xx`, **Accept order**. Desktop: four number cards (Waiting orders, Oldest waiting in minutes, Items to make, Queue value — worked out on the client from the list) and the orders as cards in a 2-column grid. Sprint 1: desktop shows cards; the table in the design is known UI debt.
+- Phone: one card per order — `#id`, customer name, placed time, items summary ("Latte ×2, Croissant ×1"), total `฿xx.xx`, **Accept order**. Desktop: four number cards (Waiting orders, Oldest waiting in minutes, Items to make, Queue value — worked out on the client from the list) and the orders as a table (Order, Customer, Items, Placed, Total, Action), as in `DesktopQueue.html`.
 - States: loading placeholders; empty "No new orders. New orders appear here when you refresh."; load error "Couldn't load orders." + **Reload queue**; accepting: only that button shows "Accepting…" (disabled); success "Order #N accepted." and the card leaves; 409 "Order #N: Already accepted by another staff member." then reload; 404 "Order #N no longer exists." then reload.
 
 ## 4. API
@@ -123,3 +123,4 @@ See [`definition-of-done.md`](definition-of-done.md). F-04 specific: TEST-F04-07
 |---|---|---|---|
 | 6 Nov 2026 | 1 | First contract; adds `accepted_at` | Before implementation (Issue #5); accepted time requested for the order detail timeline (chat with ninja, 6 Nov) |
 | 6 Nov 2026 | 1.1 | AC-F04-08 + TEST-F04-14: id above 2147483647 → 400, not 500; TEST-F04-11/13 preconditions say orders are inserted in the E2E database; UI §3: desktop cards, table is known UI debt | Recheck (#37, agreed in chat #71/#72): bug found by ninja; contract made to match the tests and code |
+| 6 Nov 2026 | 1.2 | UI §3: desktop queue is a table, as in the design (no longer UI debt) | #43: desktop layouts made to match docs/ui/design |

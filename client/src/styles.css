@@ -182,3 +182,49 @@ button[disabled] { cursor: not-allowed; }
 }
 @media (min-width: 1200px) { .menu-list { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 900px) { .phone-only { display: none; } }
+
+/* Desktop layouts from docs/ui/design/Desktop*.html (#43). Phone (< 900 px) keeps the rules above. */
+.section-head { margin: 4px 0 12px; }
+.center-text { text-align: center; }
+.no-signup { font-size: 13px; color: var(--muted); text-align: center; margin: 16px 0 0; }
+.side-sub { margin: 2px 0 0; font-size: 12px; color: var(--caramel); }
+.side-links .count { margin-left: 8px; }
+.queue-headrow, .order-headrow { display: none; }
+/* Queue card on the phone: #id + pill / customer · time / items / total + button. */
+.order-card { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "no no pill" "who time time" "items items items" "total total action"; align-items: center; gap: 6px 8px; }
+.q-no { grid-area: no; } .q-pill { grid-area: pill; } .q-who { grid-area: who; font-weight: 600; }
+.q-time { grid-area: time; } .q-time::before { content: "· "; }
+.q-items { grid-area: items; } .q-total { grid-area: total; margin-top: 6px; } .q-action { grid-area: action; margin-top: 6px; }
+.orders-split.has-detail .split-list, .orders-split:not(.has-detail) .split-detail { display: none; }
+
+@media (min-width: 900px) {
+  /* Login: full-screen photo, dark overlay, white card in the centre. */
+  .login { max-width: none; position: relative; align-items: center; justify-content: center; padding: 110px 16px 48px; background: var(--espresso); }
+  .login::before { content: ""; position: absolute; inset: 0; background: rgba(43, 27, 20, 0.62); z-index: 1; }
+  .login-photo { position: absolute; inset: 0; height: 100%; }
+  .hero { position: absolute; top: 36px; left: 48px; right: 48px; z-index: 2; display: flex; justify-content: space-between; align-items: center; background: none; padding: 0; border-radius: 0; }
+  .hero .brand { font-size: 26px; color: var(--caramel); }
+  .hero .brand br, .hero .brand em { display: none; }
+  .hero .tag { margin: 0; font-size: 14px; color: var(--beige); }
+  .login-form { position: relative; z-index: 2; width: 420px; background: #fff; border-radius: 16px; box-shadow: 0 18px 40px rgba(20, 12, 8, 0.35); padding: 0 28px 26px; }
+  .card-head { margin: -28px -10px 18px; padding: 22px 24px; border-radius: 12px; background: var(--forest); color: #fff; text-align: center; box-shadow: 0 8px 18px rgba(47, 74, 58, 0.4); }
+  .card-head .title { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 28px; }
+  .card-head .muted { color: #d9e4d3; }
+  .login-form .input { border: 1px solid #dccfbd; box-shadow: none; height: 48px; border-radius: 12px; }
+  .credit { text-align: center; }
+
+  /* Queue and My orders: rows of one white table card. */
+  .queue, .order-list { grid-template-columns: 1fr; gap: 0; background: #fff; border-radius: 16px; box-shadow: var(--card-shadow); overflow: hidden; }
+  .queue-headrow, .order-card { display: grid; grid-template-columns: 70px 120px 1fr 80px 100px 140px; grid-template-areas: "no who items time total action"; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 0; box-shadow: none; border-bottom: 1px solid #efe6d8; }
+  .queue-headrow, .order-headrow { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--cashmere); }
+  .q-pill { display: none; }
+  .q-time::before { content: none; }
+  .q-total, .q-action { margin-top: 0; }
+  .order-headrow, .order-row { display: grid; grid-template-columns: 70px 1fr 100px 90px; gap: 12px; align-items: center; padding: 12px 18px; }
+  .order-row { border-radius: 0; box-shadow: none; border-bottom: 1px solid #efe6d8; }
+  .order-row[aria-current="true"] { background: #f6efe4; }
+  .order-row .pill { justify-self: start; }
+  .orders-split { display: grid; grid-template-columns: minmax(340px, 1fr) minmax(380px, 1.2fr); gap: 20px; align-items: start; }
+  .orders-split .split-list, .orders-split .split-detail { display: block !important; }
+  .split-detail .back { display: none; }
+}

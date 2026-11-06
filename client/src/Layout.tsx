@@ -49,10 +49,12 @@ export function RequireRole({ role, title, children }: { role: Role; title: stri
     <div className="shell">
       <aside className="side">
         <p className="brand small">Campus Café</p>
+        <p className="side-sub">{user.role === "OPERATOR" ? "Staff" : "Pre-order"}</p>
         <nav className="side-links">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} end onClick={clearNotice}>
               {l.label}
+              {l.to === "/menu" && cartCount > 0 && <span className="count">{cartCount}</span>}
             </NavLink>
           ))}
         </nav>

@@ -128,7 +128,12 @@ export function MenuPage() {
   const cartPanel = (
     <section className="cart" aria-label="Cart">
       <div className="cart-head">
-        <h2 className="title">Your cart</h2>
+        <div>
+          <h2 className="title">Your cart</h2>
+          <p className="muted">
+            {count} {count === 1 ? "item" : "items"} · pickup ASAP
+          </p>
+        </div>
         <button className="msg-close static" aria-label="Close cart" onClick={() => navigate("/menu")}>
           ×
         </button>
@@ -214,6 +219,7 @@ export function MenuPage() {
       <button className="btn" onClick={placeOrder} disabled={submitting || cart.lines.length === 0}>
         {submitting ? "Placing order…" : "Place order →"}
       </button>
+      <p className="hint center-text">The final total is calculated by the café.</p>
     </section>
   );
 
@@ -224,6 +230,12 @@ export function MenuPage() {
           <p className="banner-title">Order ahead. Skip the line.</p>
           <p className="banner-sub">Coffee and snacks from ฿35. Pickup ASAP at the counter.</p>
         </section>
+        {load.state === "ok" && load.items.length > 0 && (
+          <div className="section-head">
+            <h2 className="section-title">Today's menu</h2>
+            <p className="muted">{load.items.length} items · sold-out items can't be added</p>
+          </div>
+        )}
         {full && <p className="hint">{fullMsg}</p>}
         <MenuList
           load={load}

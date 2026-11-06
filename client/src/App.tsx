@@ -3,7 +3,7 @@ import { homeFor, useAuth } from "./auth";
 import { RequireRole } from "./Layout";
 import { LoginPage } from "./pages/LoginPage";
 import { MenuPage } from "./pages/MenuPage";
-import { OrderDetailPage, OrdersPage } from "./pages/OrdersPage";
+import { OrdersSplit } from "./pages/OrdersPage";
 import { CartProvider } from "./cart";
 import { QueuePage } from "./pages/QueuePage";
 
@@ -33,8 +33,8 @@ export function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/menu" element={<RequireRole role="CUSTOMER" title="Menu"><MenuPage /></RequireRole>} />
-      <Route path="/orders" element={<RequireRole role="CUSTOMER" title="My orders"><OrdersPage /></RequireRole>} />
-      <Route path="/orders/:id" element={<RequireRole role="CUSTOMER" title="Order"><OrderDetailPage /></RequireRole>} />
+      <Route path="/orders" element={<RequireRole role="CUSTOMER" title="My orders"><OrdersSplit /></RequireRole>} />
+      <Route path="/orders/:id" element={<RequireRole role="CUSTOMER" title="My orders"><OrdersSplit /></RequireRole>} />
       <Route path="/operator/orders" element={<RequireRole role="OPERATOR" title="Order queue"><QueuePage /></RequireRole>} />
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -304,5 +304,4 @@ With each student's permission, each AI session also opened pull requests and **
 - **Process exceptions (setup, documents only):** PRs #13 and #15 were merged by their author without review, and four commits were pushed directly by the repo owner (`5f85976`, `810c7e3`, `2797462`, `d92baf0`). Every PR from #16 on was reviewed and merged by the other student. Details: `history.md`.
 - Branch `feature/F-03-e2e` is linked to Issue #10 through PR #27; the branch link under "Development" is added on the website.
 - F-03 reads menu items without a row lock inside the order transaction. In Sprint 1 nothing changes availability while the app runs, so no race exists yet; revisit with F-05 (menu management).
-- UI debt: desktop operator queue uses cards instead of a table; desktop My orders and Order detail are two pages instead of side by side.
 - Not done yet: release to `main` and tag `v0.1.0-sprint1` (the students' decision); Docker image, CI/CD and GCP deployment (Lab 5).

@@ -49,8 +49,10 @@ export function LoginPage() {
         <p className="tag">Skip the line. Pick up when it's ready.</p>
       </div>
       <form className="login-form" onSubmit={submit} noValidate>
-        <h1 className="title">Sign in</h1>
-        <p className="muted">Use your café account.</p>
+        <div className="card-head">
+          <h1 className="title">Sign in</h1>
+          <p className="muted">Use your café account.</p>
+        </div>
         {notice && !error && <div className="msg info">{notice}</div>}
         {error && (
           <div className="msg error" role="alert">
@@ -89,6 +91,7 @@ export function LoginPage() {
         <button className="btn" type="submit" disabled={busy}>
           {busy ? "Logging in…" : "Log in"}
         </button>
+        <p className="no-signup">Accounts are created by the café. No sign-up.</p>
         <p className="credit">Photos: Shixart1985 (CC BY 2.0), Takeaway (CC BY-SA 3.0), via Wikimedia Commons.</p>
       </form>
     </div>

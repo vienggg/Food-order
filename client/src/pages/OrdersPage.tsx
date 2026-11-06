@@ -19,8 +19,30 @@ function Skeletons() {
   );
 }
 
+// /orders and /orders/:id. Desktop: list and detail side by side (DesktopOrders.html).
+// Phone: the list, or the detail when an order is open.
+export function OrdersSplit() {
+  const { id } = useParams();
+  return (
+    <div className={"orders-split" + (id ? " has-detail" : "")}>
+      <section className="split-list">
+        <OrdersPage selectedId={id} />
+      </section>
+      <section className="split-detail">
+        {id ? (
+          <OrderDetailPage key={id} />
+        ) : (
+          <div className="empty">
+            <p className="muted">Select an order to see its details.</p>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
 // S3 My orders (F-03): own orders, newest first. Refresh by hand (no polling in Sprint 1).
-export function OrdersPage() {
+export function OrdersPage({ selectedId }: { selectedId?: string }) {
   const [orders, setOrders] = useState<OrderSummary[] | "loading" | "error">("loading");
   const navigate = useNavigate();
   const load = useCallback(() => {
@@ -56,9 +78,19 @@ export function OrdersPage() {
         Refresh list
       </button>
       <ul className="order-list">
+        <li className="order-headrow" aria-hidden="true">
+          <span>Order</span>
+          <span>Placed</span>
+          <span>Status</span>
+          <span>Total</span>
+        </li>
         {orders.map((o) => (
           <li key={o.id}>
-            <button className="order-row" onClick={() => navigate(`/orders/${o.id}`)}>
+            <button
+              className="order-row"
+              aria-current={String(o.id) === selectedId ? "true" : undefined}
+              onClick={() => navigate(`/orders/${o.id}`)}
+            >
               <span className="order-no">#{o.id}</span>
               <span className="muted">
                 {formatPlacedTime(o.createdAt)} · {o.itemCount} {o.itemCount === 1 ? "item" : "items"}
